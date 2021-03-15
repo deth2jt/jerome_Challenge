@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: index.html
+    destination: /var/www/html/
+
+hooks:
+  ApplicationStop:
+    - location: script/restart_server
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: script/before_install
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: script/restart_server
+      timeout: 300
+      runas: root
