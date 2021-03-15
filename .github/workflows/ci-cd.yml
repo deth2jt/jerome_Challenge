@@ -66,7 +66,7 @@ jobs:
 
       # Install project dependencies and build
       - name: Install apache
-        run: sudo apt install apache2
+        run: sudo apt install apache2 -y 
       - name: setup ufw for apache
         run: sudo ufw allow 'Apache'
       - name: start web service
@@ -100,7 +100,7 @@ jobs:
           --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
           --ignore-hidden-files \
           --s3-location s3://${{ secrets.BUCKET_GIT_NAME }}/${{ matrix.s3-filename }}.zip \
-          --source html
+          --source .
       # Create deployment to CodeDeploy
       - name: AWS Create Deployment
         run: |
