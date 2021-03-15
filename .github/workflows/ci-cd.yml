@@ -31,15 +31,15 @@ jobs:
       #delete package-lock.json file
       #npm install
       - name: Install apache
-        run: sudo apt install apache2 -y
+        run: sudo apt install apache2
       - name: setup ufw for apache
         run: sudo ufw allow 'Apache'
       - name: start web service
-        run: systemctl start apache2
+        run: sudo systemctl start apache2
       - name: status of web service
-        run: systemctl status apache2
+        run: sudo systemctl status apache2
       - name: enable service on restart
-        run: systemctl enable apache2
+        run: sudo systemctl enable apache2
 
   deploy:
     name: CD Pipeline
@@ -66,15 +66,15 @@ jobs:
 
       # Install project dependencies and build
       - name: Install apache
-        run: sudo apt install apache2 -y
+        run: sudo apt install apache2
       - name: setup ufw for apache
         run: sudo ufw allow 'Apache'
       - name: start web service
-        run: systemctl start apache2
+        run: sudo systemctl start apache2
       - name: status of web service
-        run: systemctl status apache2
+        run: sudo systemctl status apache2
       - name: enable service on restart
-        run: systemctl enable apache2
+        run: sudo systemctl enable apache2
 
       # Install AWS CLI 2
       - name: Install AWS CLI 2
