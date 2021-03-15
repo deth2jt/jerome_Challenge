@@ -58,12 +58,13 @@ output "public_key" {
 
 module "ec2" {
   source = "./ec2"
-  owners = "099720109477"
+  owners = "679593333241"
+  name   = "CentOS Linux 7 x86_64 HVM EBS *"
 
-  image_id       = "ami-013f17f36f8b1fefb"
-  image_location = "099720109477/ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-20210224"
-  name           = "*ubuntu-bionic-18.04-amd64-server-20210224*"
-
+  #cleanup
+  image_id       = "ami-096fda3c22c1c990a"
+  image_location = "309956199498/RHEL-8.3.0_HVM-20201031-x86_64-0-Hourly2-GP2"
+  
   iam_profile_name = module.iam.code_deploy_inst_profile
   #my_public_key  = "${data.aws_secretsmanager_secret_version.current.secret_string}"
   my_public_key  = module.sms.secret_string

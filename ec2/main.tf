@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "centos" {
 #data "aws_ami" "redhat" {
     owners = ["${var.owners}"]
     most_recent = true
@@ -13,15 +13,23 @@ data "aws_ami" "ubuntu" {
     #image_location = "${var.image_location}"
     #name = "${var.name}"
 
+    
     filter {
         name   = "name"
         values = ["${var.name}"]
     }
 
     filter {
+      name   = "architecture"
+      values = ["x86_64"]
+    }
+
+
+    filter {
         name   = "root-device-type"
         values = ["ebs"]
     }
+    
 }
 
 
@@ -48,7 +56,7 @@ resource "aws_instance" "my-foo-instance" {
     #most_recent = true
 
     #ami = "${var.image_id}"
-    ami = "${data.aws_ami.ubuntu.id}"
+    ami = "${data.aws_ami.centos.id}"
     iam_instance_profile = "${var.iam_profile_name}"
     instance_type = "${var.instance_type}"
     key_name = "${aws_key_pair.myfoo-key.id}"
