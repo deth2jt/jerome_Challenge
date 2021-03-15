@@ -1,12 +1,12 @@
 
 variable "name_tage" {
   type    = string
-  default = "aws-codedeploy"
+  default = "aws-codedeploy-1"
 }
 
 variable "env_tage" {
   type    = string
-  default = "staging"
+  default = "main"
 }
 
 variable "repo_name" {

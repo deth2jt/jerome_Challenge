@@ -95,13 +95,7 @@ resource "aws_security_group_rule" "all_outbound_access" {
 	cidr_blocks = ["0.0.0.0/0"]
 }
 
-resource "aws_route" "my-tgw-route" {
-  route_table_id         = "${aws_default_route_table.public_route.id}"
-  #route_table_id         = "${aws_route_table.public_route.id}"
-  destination_cidr_block = "0.0.0.0/0"
-  #transit_gateway_id     = "${var.transit_gateway}"
-  gateway_id             = "${aws_internet_gateway.gw.id}"
-}
+
 
 #resource "aws_default_route_table" "private_route" {
 resource "aws_default_route_table" "public_route" {
@@ -120,3 +114,13 @@ resource "aws_default_route_table" "public_route" {
     }
 }
 
+
+/*
+resource "aws_route" "my-tgw-route" {
+  route_table_id         = "${aws_default_route_table.public_route.id}"
+  #route_table_id         = "${aws_route_table.public_route.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  #transit_gateway_id     = "${var.transit_gateway}"
+  gateway_id             = "${aws_internet_gateway.gw.id}"
+}
+*/

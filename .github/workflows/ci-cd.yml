@@ -48,8 +48,8 @@ jobs:
       matrix:
         python-version: [3.8]
         #node-version: ['12.x']
-        appname: ['aws-codedeploy']
-        deploy-group: ['staging']
+        appname: ['aws-codedeploy-1']
+        deploy-group: ['main']
         #get name off bucket name
         #s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}'
         s3-filename: ['aws-codedeploy-${{ github.sha }}']
