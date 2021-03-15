@@ -101,7 +101,7 @@ jobs:
           --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
           --ignore-hidden-files \
           --s3-location s3://${{ secrets.BUCKET_GIT_NAME }}/${{ matrix.s3-filename }}.zip \
-          --source html
+          --source ./html
       # Create deployment to CodeDeploy
       - name: AWS Create Deployment
         run: |
