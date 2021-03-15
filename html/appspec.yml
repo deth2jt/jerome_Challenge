@@ -4,10 +4,6 @@ files:
   - source: /index.html
     destination: /var/www/html/
 hooks:
-  ApplicationStop:
-    - location: /script/restart_server
-      timeout: 30
-      runas: root
   BeforeInstall:
     - location: /script/before_install
       timeout: 30

@@ -110,4 +110,5 @@ jobs:
            --deployment-config-name CodeDeployDefault.AllAtOnce \
            --deployment-group-name ${{ matrix.deploy-group }} \
            --file-exists-behavior OVERWRITE \
+           --ignore-application-stop-failures \
            --s3-location bucket=${{ secrets.BUCKET_GIT_NAME }},key=${{ matrix.s3-filename }}.zip,bundleType=zip 
