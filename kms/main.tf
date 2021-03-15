@@ -85,5 +85,5 @@ EOF
 
 resource "aws_kms_alias" "smc-kms-alias" {
     target_key_id = "${aws_kms_key.my-kms-key.id}"
-    name = "alias/terraform-final-encryption-key"
+    name = "alias/terraform_final_encryption_key"
 }
