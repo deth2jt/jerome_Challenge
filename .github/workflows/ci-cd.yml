@@ -1,0 +1,104 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  buildAndTest:
+    name: CI Pipeline Install
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.x']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Initialize Node.js
+      - name: Install httpd
+        uses: actions/setup-node@v1
+        #with:
+          #node-version: ${{ matrix.node-version }}
+
+      # Install project dependencies, test and build npm install nuxt
+      #npm cache clean --force
+      #delete node_modules folder
+      #delete package-lock.json file
+      #npm install
+      - name: Install apache
+        run: yum -y install httpd
+      - name: start web service
+        run: service httpd start
+      - name: enable service on restart
+        run: chkconfig httpd on
+
+  deploy:
+    name: CD Pipeline
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+        node-version: ['12.x']
+        appname: ['aws-codedeploy']
+        deploy-group: ['staging']
+        #get name off bucket name
+        s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}
+        s3-filename: ['aws-codedeploy-${{ github.sha }}']
+
+    needs: buildAndTest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Initialize Node.js
+      - name: Install httpd
+        uses: actions/setup-node@v1
+        #with:
+          #node-version: ${{ matrix.node-version }}
+
+      # Install project dependencies and build
+      - name: Install apache
+        run: yum -y install httpd
+      - name: start web service
+        run: service httpd start
+      - name: enable service on restart
+        run: chkconfig httpd on
+
+      # Install AWS CLI 2
+      - name: Install AWS CLI 2
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+      # Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 
+
+
+
+      # Deploy push to AWS S3
+      - name: AWS Deploy push
+        run: |
+          aws deploy push \
+          --application-name ${{ matrix.appname }} \
+          --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
+          --ignore-hidden-files \
+          --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip \
+          --source html
+      # Create deployment to CodeDeploy
+      - name: AWS Create Deployment
+        run: |
+          aws deploy create-deployment \
+           --application-name ${{ matrix.appname }} \
+           --deployment-config-name CodeDeployDefault.OneAtATime \
+           --deployment-group-name ${{ matrix.deploy-group }} \
+           --file-exists-behavior OVERWRITE \
+           --s3-location bucket=${{ matrix.s3-bucket }},key=${{ matrix.s3-filename }}.zip,bundleType=zip \
