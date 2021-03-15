@@ -11,10 +11,10 @@ on:
 jobs:
   buildAndTest:
     name: CI Pipeline Install
-    runs-on: centos-latest
-    strategy:
-      matrix:
-        node-version: ['12.x']
+    runs-on: ubuntu-latest
+    #strategy:
+      #matrix:
+        #node-version: ['12.x']
 
     steps:
       - uses: actions/checkout@v2
@@ -31,11 +31,13 @@ jobs:
       #delete package-lock.json file
       #npm install
       - name: Install apache
-        run: yum -y install httpd
+        run: sudo apt install apache2 
+      - name: setup ufw for apache
+        run: sudo ufw allow 'Apache'
       - name: start web service
-        run: service httpd start
+        run: systemctl status apache2
       - name: enable service on restart
-        run: chkconfig httpd on
+        run: systemctl enable apache2
 
   deploy:
     name: CD Pipeline
@@ -62,11 +64,13 @@ jobs:
 
       # Install project dependencies and build
       - name: Install apache
-        run: yum -y install httpd
+        run: sudo apt install apache2 
+      - name: setup ufw for apache
+        run: sudo ufw allow 'Apache'
       - name: start web service
-        run: service httpd start
+        run: systemctl status apache2
       - name: enable service on restart
-        run: chkconfig httpd on
+        run: systemctl enable apache2
 
       # Install AWS CLI 2
       - name: Install AWS CLI 2
