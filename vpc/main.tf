@@ -115,7 +115,7 @@ resource "aws_default_route_table" "public_route" {
 }
 
 
-/*
+
 resource "aws_route" "my-tgw-route" {
   route_table_id         = "${aws_default_route_table.public_route.id}"
   #route_table_id         = "${aws_route_table.public_route.id}"
@@ -123,4 +123,3 @@ resource "aws_route" "my-tgw-route" {
   #transit_gateway_id     = "${var.transit_gateway}"
   gateway_id             = "${aws_internet_gateway.gw.id}"
 }
-*/
