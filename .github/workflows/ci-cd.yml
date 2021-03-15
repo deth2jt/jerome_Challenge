@@ -42,12 +42,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
-        node-version: ['12.x']
+        #python-version: [3.8]
+        #node-version: ['12.x']
         appname: ['aws-codedeploy']
         deploy-group: ['staging']
         #get name off bucket name
-        s3-bucket: ['${{ secrets.BUCKET_GIT_NAME }}']
+        s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}'
         s3-filename: ['aws-codedeploy-${{ github.sha }}']
 
     needs: buildAndTest
