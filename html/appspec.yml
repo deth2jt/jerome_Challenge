@@ -1,9 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: index.html
+  - source: /index.html
     destination: /var/www/html/
-
 hooks:
   ApplicationStop:
     - location: /script/restart_server
