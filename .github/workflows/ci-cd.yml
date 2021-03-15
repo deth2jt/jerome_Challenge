@@ -11,7 +11,7 @@ on:
 jobs:
   buildAndTest:
     name: CI Pipeline Install
-    runs-on: centos7
+    runs-on: centos7-latest
     strategy:
       matrix:
         node-version: ['12.x']
