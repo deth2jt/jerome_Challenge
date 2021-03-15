@@ -47,7 +47,7 @@ jobs:
         appname: ['aws-codedeploy']
         deploy-group: ['staging']
         #get name off bucket name
-        s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}'
+        #s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}'
         s3-filename: ['aws-codedeploy-${{ github.sha }}']
 
     needs: buildAndTest
@@ -91,7 +91,7 @@ jobs:
           --application-name ${{ matrix.appname }} \
           --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
           --ignore-hidden-files \
-          --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip \
+          --s3-location s3://${{ secrets.BUCKET_GIT_NAME }}/${{ matrix.s3-filename }}.zip \
           --source html
       # Create deployment to CodeDeploy
       - name: AWS Create Deployment
@@ -101,4 +101,4 @@ jobs:
            --deployment-config-name CodeDeployDefault.OneAtATime \
            --deployment-group-name ${{ matrix.deploy-group }} \
            --file-exists-behavior OVERWRITE \
-           --s3-location bucket=${{ matrix.s3-bucket }},key=${{ matrix.s3-filename }}.zip,bundleType=zip \
+           --s3-location bucket=${{ secrets.BUCKET_GIT_NAME }},key=${{ matrix.s3-filename }}.zip,bundleType=zip \
