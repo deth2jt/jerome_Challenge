@@ -35,7 +35,7 @@ jobs:
       - name: setup ufw for apache
         run: sudo ufw allow 'Apache'
       - name: start web service
-        run: systemctl status apache2
+        run: systemctl start apache2
       - name: enable service on restart
         run: systemctl enable apache2
 
@@ -68,7 +68,7 @@ jobs:
       - name: setup ufw for apache
         run: sudo ufw allow 'Apache'
       - name: start web service
-        run: systemctl status apache2
+        run: systemctl start apache2
       - name: enable service on restart
         run: systemctl enable apache2
 
