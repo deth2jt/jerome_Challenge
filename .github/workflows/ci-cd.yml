@@ -47,7 +47,7 @@ jobs:
         appname: ['aws-codedeploy']
         deploy-group: ['staging']
         #get name off bucket name
-        s3-bucket: ${{ secrets.BUCKET_GIT_NAME }}
+        s3-bucket: ['${{ secrets.BUCKET_GIT_NAME }}']
         s3-filename: ['aws-codedeploy-${{ github.sha }}']
 
     needs: buildAndTest
