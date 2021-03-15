@@ -9,7 +9,8 @@ resource "aws_codedeploy_deployment_group" "foo" {
     service_role_arn       = "${var.iam_deploy_name}"
     #deployment_config_name = aws_codedeploy_deployment_config.foo.id
 
-    deployment_config_name = "CodeDeployDefault.OneAtATime" # AWS defined deployment config
+    #deployment_config_name = "CodeDeployDefault.OneAtATime" # AWS defined deployment config
+    deployment_config_name = "CodeDeployDefault.AllAtOnce"
   
     ec2_tag_set {
         ec2_tag_filter  {
