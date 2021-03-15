@@ -44,9 +44,9 @@ module "sms" {
 
   description = "public key"
   kms_key     = module.kms.kms_key.id
-  #secret_string = "file(file:///home/userone/.ssh/test_rsa.pub)"
+  #secret_string = "file(file:///home/userone/.ssh/test_rsa.pub                                 )"
   secret_string = file("/home/userone/.ssh/test_rsa.pub")
-  name          = "public_foo_new_key"
+  name          = "public_foo_new                                                                             _key"
 }
 
 
