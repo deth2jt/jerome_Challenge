@@ -13,7 +13,7 @@ resource "aws_codedeploy_deployment_group" "foo" {
   
     ec2_tag_set {
         ec2_tag_filter  {
-            key   = "name"
+            key   = "Name"
             type  = "KEY_AND_VALUE"
             value = "${var.app_name}"
         }   

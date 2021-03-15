@@ -65,7 +65,7 @@ resource "aws_instance" "my-foo-instance" {
     user_data = "${data.template_file.init.rendered}"
 
     tags = {
-        name = "${element(var.ec2_tags, 0)}"
+        Name = "${element(var.ec2_tags, 0)}"
         env = "${element(var.ec2_tags, 1)}"
     }
 }
