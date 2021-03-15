@@ -1,3 +1,0 @@
-# deploy/after_install/
-#!/bin/bash
-sudo systemctl restart apache2
