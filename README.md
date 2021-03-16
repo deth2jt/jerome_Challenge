@@ -75,7 +75,7 @@ It uses files in html directory for deploy.
 ![image](https://user-images.githubusercontent.com/458820/111347400-8d8b7080-8655-11eb-92b7-d462016f0b23.png)
 
 
-NB: atop of each module maybe a link to website that found useful will working out kinks 
+NB: atop of each module maybe a link to website that found useful while working out kinks 
 
 Also python code can be found as shown below:
 ```
