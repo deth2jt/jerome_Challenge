@@ -65,7 +65,7 @@ A noteworthy file; is the userdata used for the init conf of our instance:
 [userone@test com_exam]$ ll ec2/userdata.tpl 
 -rw-rw-r--. 1 userone userone 2951 Mar 15 14:29 ec2/userdata.tpl
 ```
-It does a number of things that include: setting apache; codedeploy agent; creating ssl keys and cert and doing initial apache conf.
+It does a number of things that include: installing apache and codedeploy agent; creating ssl keys and cert and doing initial apache conf.
 
 
 ## _Github necessities_
