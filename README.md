@@ -94,3 +94,7 @@ https://gitlab.com/deth2jt/terrafom-codedeploy
 this repo show the infrastructure resources that was needed to accomplish codedeploy 
 
 Through this project I was able to combine both school of thoughts 
+
+Kinly allow for ~/.aws/credentials to have aws_access_key_id + aws_secret_access_key
+
+Also set the GITHUB_TOKEN value
