@@ -71,7 +71,7 @@ It does a number of things that include: installing apache and codedeploy agent;
 ## _Github necessities_
 Done so that we can make use of worflows to have a future code changes push through aws codedeploy (uploaded to s3 as well).
 Once is push is done on main it will cause a workflow as seen in below screenshot to occur.
-It uses files in html directory for deploy. 
+Additionally It uses files in html directory for deploy. 
 ![image](https://user-images.githubusercontent.com/458820/111347400-8d8b7080-8655-11eb-92b7-d462016f0b23.png)
 
 
