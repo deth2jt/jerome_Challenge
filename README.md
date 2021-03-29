@@ -5,7 +5,7 @@
 ## General Info
 
 This project makes use of terraform to effect changes across aws resources along with settings for github secrets values to aid ci/cd workflow that calls codepeloy. First terraform is used to setup aws allthethings for our infrastructure. Next once a push is done to main git branch it triggers the workflow.
-The workflow has test job that will check if action will result in success if so; it does a deploy push to s3 followed by a deploy to ec2 instance [for stake of not going overboard I didnt make green blue deploy with load balancer]
+The workflow has test job that will check if action will result in success if so; it does a deploy push to s3 followed by a deploy to ec2 instance [for stake of not going overboard I didnt make green blue deploy with load balancer]. A local file is created with terraform.tf info for s3 but a terrform run will have to be done to write file.
 
 >AWS sache to include:
 >iam
