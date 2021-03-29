@@ -44,7 +44,7 @@ module "sms" {
 
   description = "public key"
   kms_key     = module.kms.kms_key.id
-  #secret_string = "file(file:///home/userone/.ssh/test_rsa.pub                                 )"
+  #secret_string = "file(file:///home/userone/.ssh/test_rsa.pub)"
   secret_string = file("/home/userone/.ssh/test_rsa.pub")
   name          = "public_foo_new_key"
 }
@@ -84,6 +84,24 @@ module "codedeploy" {
   iam_deploy_name       = module.iam.code_deploy_service_role.arn
 }
 
+
+module "dynamodb" {
+  source          = "./dynamodb"
+
+  name            = "terraform-up-and-running-locks"
+  billing_mode    = "PAY_PER_REQUEST"
+  hash_key        = "LockID"
+}
+
+module "backend" {
+  source         = "./backend"
+
+  bucket         = module.s3.terra_bucket_name
+  key            = "terraform.tfstate"
+  dynamodb_table = module.dynamodb.dyn_db_name
+  
+}
+
 module "github" {
   source = "./github"
 
@@ -94,6 +112,8 @@ module "github" {
   AWS_SECRET_ACCESS_KEY = trimspace(split( "=",   split("\n", file("~/.aws/credentials"))[2] )[1])
 
 }
+
+
 
 
 
